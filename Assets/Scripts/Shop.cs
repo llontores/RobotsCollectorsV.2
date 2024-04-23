@@ -9,7 +9,7 @@ public class Shop : MonoBehaviour
 
     public int RobotPrice => _robotPrice;
 
-    private Transform _newBaseFlag;
+    private Vector3 _newBaseFlagPosition;
     private int _clicksCounter = 0;
 
     private void Update()
@@ -20,9 +20,9 @@ public class Shop : MonoBehaviour
             RaycastHit hit;
             CollectorsBase collectorsBase;
 
-            if (_clicksCounter == 0)
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                if (_clicksCounter == 0)
                 {
                     //print(hit.collider.gameObject.name);
                     collectorsBase = hit.collider.GetComponent<CollectorsBase>();
@@ -35,15 +35,16 @@ public class Shop : MonoBehaviour
                     else
                         _clicksCounter = 0;
                 }
-            }
-            else if (_clicksCounter == 1)
-            {
-                Vector3 mousePosition = Input.mousePosition;
+                else if (_clicksCounter == 1)
+                {
+                    Vector3 mousePosition = Input.mousePosition;
 
-                _newBaseFlag.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x,
-                mousePosition.y, Camera.main.nearClipPlane));
-                //collectorsBase.SetNewBaseFlag(_newBaseFlag);
-                _clicksCounter = 0;
+                    _newBaseFlagPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x,
+                    mousePosition.y, Camera.main.nearClipPlane));
+                    //collectorsBase.SetNewBaseFlag(_newBaseFlag);
+                    _clicksCounter = 0;
+                    print(_newBaseFlagPosition);
+                }
             }
 
         }
