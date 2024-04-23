@@ -14,6 +14,8 @@ public class Spawner : ObjectPool
     [SerializeField] private int _minAmount;
     [SerializeField] private int _maxAmount;
 
+    public UnityAction OreSpawned;
+
     private Queue<Ore> _spawnedOres = new Queue<Ore>();
     public int QueueCount => _spawnedOres.Count;
 
@@ -33,18 +35,19 @@ public class Spawner : ObjectPool
 
         while (true)
         {
+            xPos = Random.Range(_minX + transform.position.x, _maxX + transform.position.x);
+            zPos = Random.Range(_minZ + transform.position.z, _maxZ + transform.position.z);
 
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) 
             {
 
                 if (TryGetObject(out resource))
                 {
 
                     resource.SetActive(true);
-                    xPos = Random.Range(_minX + transform.position.x, _maxX + transform.position.x);
-                    zPos = Random.Range(_minZ + transform.position.z, _maxZ + transform.position.z);
                     resource.transform.position = new Vector3(xPos, transform.position.y, zPos);
                     _spawnedOres.Enqueue(resource.GetComponent<Ore>());
+                    OreSpawned?.Invoke();
                 }
             }
             amount = Random.Range(_minAmount, _maxAmount);

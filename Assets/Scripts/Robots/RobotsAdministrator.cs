@@ -15,10 +15,12 @@ public class RobotsAdministrator : MonoBehaviour
 
     private Queue<Ore> _ores = new Queue<Ore>();
     private List<Robot> _robots = new List<Robot>();
+    
 
 
     private void OnEnable()
     {
+        _spawner.OreSpawned += TryAskRobot;
         for (int i = 0; i < _inputRobots.Length; i++)
         {
             _robots.Add(_inputRobots[i]);
@@ -34,6 +36,7 @@ public class RobotsAdministrator : MonoBehaviour
 
     private void OnDisable()
     {
+        _spawner.OreSpawned -= TryAskRobot;
         for (int i = 0; i < _robots.Count; i++)
         {
             _robots[i].WorkingStateChanged -= TryAskRobot;
@@ -61,9 +64,9 @@ public class RobotsAdministrator : MonoBehaviour
     {
         Robot addedRobot = Instantiate(_robotsPrefab, _newRobotsSpawnpoint.position, Quaternion.identity);
         addedRobot.SetBase(_oresReceiver, _storage);
-        TryAskRobot();
         addedRobot.WorkingStateChanged += TryAskRobot;
         _robots.Add(addedRobot);
         _oresCounter.AddRobot(addedRobot);
+        TryAskRobot();
     }
 }

@@ -195,7 +195,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -216,12 +216,12 @@ MonoBehaviour:
   _prefabs:
   - {fileID: 1588557066262399289, guid: 6c1a8b80e40b9554986dcaa1c06dbfb5, type: 3}
   _delay: 5
-  _minX: 5
-  _maxX: 5
-  _minZ: 5
-  _maxZ: 5
-  _minAmount: 1
-  _maxAmount: 3
+  _minX: 2
+  _maxX: 2
+  _minZ: 2
+  _maxZ: 2
+  _minAmount: 3
+  _maxAmount: 8
 --- !u!4 &637943101
 Transform:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ Transform:
   m_GameObject: {fileID: 637943099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.285, y: 1.468, z: 79.647}
+  m_LocalPosition: {x: 65.15, y: 0.62, z: 78.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -415,13 +415,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 64.1, y: 13.32, z: 84.24}
+  m_LocalRotation: {x: 0.340887, y: -0.6195128, z: 0.34088698, w: 0.6195128}
+  m_LocalPosition: {x: 69.25, y: 3.684, z: 82.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 57.644, y: -90, z: 0}
 --- !u!1 &1216499882
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1021735879587126604, guid: 8733c1802495db342a7952774a96f93e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.288925
+      value: 83.125
       objectReference: {fileID: 0}
     - target: {fileID: 1021735879587126604, guid: 8733c1802495db342a7952774a96f93e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -866,6 +866,10 @@ PrefabInstance:
     - target: {fileID: 2217207499155825343, guid: 8733c1802495db342a7952774a96f93e, type: 3}
       propertyPath: m_Name
       value: Robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749930847030216722, guid: 8733c1802495db342a7952774a96f93e, type: 3}
+      propertyPath: _getTargetDistance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

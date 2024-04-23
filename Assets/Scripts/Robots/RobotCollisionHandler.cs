@@ -17,7 +17,6 @@ public class RobotCollisionHandler : MonoBehaviour
             {
                 GetOre?.Invoke();
             }
-
         }
     }
 

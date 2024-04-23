@@ -17,6 +17,7 @@ public class OresCounter : MonoBehaviour
     public void IncreaseOres(Ore ore)
     {
         _counter++;
+        print(_counter);
         TryBuyNewRobot();
     }
 

@@ -40,4 +40,5 @@ public class CollectorsBase : MonoBehaviour
             if (_oresAmount >= _newBasePrice)
                 print("������ � �������� ������ ����� �� �������� ����� ���� �� " + _newBaseFlag.position);
     }
+
 }
