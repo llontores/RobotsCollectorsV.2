@@ -41,13 +41,6 @@ public class RobotMover : MonoBehaviour
         _startPosition = startPosition;
     }
 
-    //public void Move(Vector3 target){
-    //    //Vector3 direction = (target - transform.position).normalized;
-    //    //transform.Translate(direction * _speed * Time.deltaTime);
-    //    Vector3.MoveTowards(transform.position, target, _speed * Time.deltaTime);
-    //    transform.LookAt(target);
-    //}
-
     private void ControlMoving(bool isMoving, Transform target)
     {
         if (isMoving)
@@ -61,14 +54,9 @@ public class RobotMover : MonoBehaviour
         while (Vector3.Distance(transform.position, targetPosition.position) > _getTargetDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, _speed * Time.deltaTime);
-            //Vector3 direction = (targetPosition - transform.position).normalized;
-            //transform.Translate(direction * _speed * Time.deltaTime);
-
             yield return null;
         }
     }
-
-
 
     public void PickUpOre()
     {

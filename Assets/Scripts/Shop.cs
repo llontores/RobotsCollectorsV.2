@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private int _robotPrice;
+    [SerializeField] private int _newBasePrice;
 
     public int RobotPrice => _robotPrice;
+    public int NewBasePrice => _newBasePrice;
 
     private Vector3 _newBaseFlagPosition;
     private int _clicksCounter = 0;
+    private CollectorsBase _collectorsBase;
 
     private void Update()
     {
@@ -18,30 +21,25 @@ public class Shop : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            CollectorsBase collectorsBase;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (_clicksCounter == 0)
                 {
-                    //print(hit.collider.gameObject.name);
-                    collectorsBase = hit.collider.GetComponent<CollectorsBase>();
+                    _collectorsBase = hit.collider.GetComponent<CollectorsBase>();
 
-                    if (collectorsBase != null)
-                    {
+                    if (_collectorsBase != null)
                         _clicksCounter++;
-                        print("� ������� �� ����" + collectorsBase.gameObject.name);
-                    }
+                    
                     else
                         _clicksCounter = 0;
                 }
                 else if (_clicksCounter == 1)
                 {
                     Vector3 mousePosition = Input.mousePosition;
-
                     _newBaseFlagPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x,
                     mousePosition.y, Camera.main.nearClipPlane));
-                    //collectorsBase.SetNewBaseFlag(_newBaseFlag);
+                    _collectorsBase.SetNewBaseFlag(_newBaseFlagPosition);
                     _clicksCounter = 0;
                     print(_newBaseFlagPosition);
                 }

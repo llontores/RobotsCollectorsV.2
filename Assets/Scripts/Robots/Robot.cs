@@ -41,7 +41,6 @@ public class Robot : MonoBehaviour
         _target = target;
         _mover.SetParametres(_target.gameObject.transform, _storage.position, _oresReceiver.position);
         MovingStateChanged?.Invoke(true, target.gameObject.transform);
-        //_moveJob = StartCoroutine(Move(_target.gameObject.transform));
         _isUsing = true;
         _handler.SetTarget(target);
     }
@@ -52,24 +51,16 @@ public class Robot : MonoBehaviour
         _storage = storage;
     }
 
-
-    //private IEnumerator Move(Transform targetPosition)
-    //{
-    //    while(Vector3.Distance(transform.position,targetPosition.position) > _getTargetDistance)
-    //    {
-    //        _mover.Move(targetPosition.position);
-
-    //        yield return null;
-    //    }
-    //}
+    public void BuildBase(Vector3 newBaseFlag)
+    {
+        //_mover.SetParametres()
+    }
 
     private void GoBack()
     {
-        //EndMoveJob();
         MovingStateChanged?.Invoke(false, _oresReceiver);
         _mover.PickUpOre();
         MovingStateChanged?.Invoke(true, _oresReceiver);
-        //_moveJob = StartCoroutine(Move(_oresReceiver));
     }
 
     private void GetBase()

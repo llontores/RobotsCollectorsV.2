@@ -4,41 +4,24 @@ using UnityEngine;
 
 public class CollectorsBase : MonoBehaviour
 {
-    //[SerializeField] private OresCounter _counter;
     [SerializeField] private RobotsAdministrator _administrator;
-    [SerializeField] private int _newBasePrice;
 
+    public Vector3 NewBaseFlag => _newBaseFlag;
+    public bool NewBasePriority => _newBasePriority;
 
-    private Transform _newBaseFlag;
-    private int _oresAmount;
-    private void OnEnable()
+    private bool _newBasePriority = false;
+    private Vector3 _newBaseFlag;
+
+    public void SetNewBaseFlag(Vector3 flagPosition)
     {
-        //_counter.OreCollected += CountOres;
-    }
-
-    private void OnDisable()
-    {
-        //_counter.OreCollected -= CountOres;
-    }
-
-    public void SetNewBaseFlag(Transform flagPosition)
-    {
-        _newBaseFlag.position = new Vector3(flagPosition.position.x, transform.position.y, flagPosition.position.z);
-        print(_newBaseFlag.position);
+        _newBaseFlag = flagPosition;
         TryBuildNewBase();
-    }
-
-    private void CountOres(int oresAmount)
-    {
-        _oresAmount = oresAmount;
-        //TryBuildNewBase();
     }
 
     private void TryBuildNewBase()
     {
         if (_newBaseFlag != null)
-            if (_oresAmount >= _newBasePrice)
-                print("������ � �������� ������ ����� �� �������� ����� ���� �� " + _newBaseFlag.position);
+            _newBasePriority = true;
     }
 
 }

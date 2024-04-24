@@ -16,11 +16,9 @@ public class RobotsAdministrator : MonoBehaviour
     private Queue<Ore> _ores = new Queue<Ore>();
     private List<Robot> _robots = new List<Robot>();
     
-
-
     private void OnEnable()
     {
-        _spawner.OreSpawned += TryAskRobot;
+        _spawner.OreSpawned += TryBringOre;
         for (int i = 0; i < _inputRobots.Length; i++)
         {
             _robots.Add(_inputRobots[i]);
@@ -30,26 +28,26 @@ public class RobotsAdministrator : MonoBehaviour
 
         for (int i = 0; i < _robots.Count; i++)
         {
-            _robots[i].WorkingStateChanged += TryAskRobot;
+            _robots[i].WorkingStateChanged += TryBringOre;
         }
     }
 
     private void OnDisable()
     {
-        _spawner.OreSpawned -= TryAskRobot;
+        _spawner.OreSpawned -= TryBringOre;
         for (int i = 0; i < _robots.Count; i++)
         {
-            _robots[i].WorkingStateChanged -= TryAskRobot;
+            _robots[i].WorkingStateChanged -= TryBringOre;
         }
     }
 
     public void AddOre(Ore ore)
     {
         _ores.Enqueue(ore);
-        TryAskRobot();
+        TryBringOre();
     }
 
-    private void TryAskRobot()
+    private void TryBringOre()
     {
         Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
 
@@ -64,9 +62,19 @@ public class RobotsAdministrator : MonoBehaviour
     {
         Robot addedRobot = Instantiate(_robotsPrefab, _newRobotsSpawnpoint.position, Quaternion.identity);
         addedRobot.SetBase(_oresReceiver, _storage);
-        addedRobot.WorkingStateChanged += TryAskRobot;
+        addedRobot.WorkingStateChanged += TryBringOre;
         _robots.Add(addedRobot);
         _oresCounter.AddRobot(addedRobot);
-        TryAskRobot();
+        TryBringOre();
+    }
+
+    public void TryBuildBase(Vector3 newBaseFlag)
+    {
+        Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
+
+        if (result != null && _spawner.QueueCount > 0)
+        {
+
+        }
     }
 }
