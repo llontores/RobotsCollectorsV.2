@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(RobotMover))]
 public class Robot : MonoBehaviour
@@ -39,7 +40,6 @@ public class Robot : MonoBehaviour
     public void BringOre(Ore target)
     {
         _target = target;
-        _mover.SetParametres(_target.gameObject.transform, _storage.position, _oresReceiver.position);
         MovingStateChanged?.Invoke(true, target.gameObject.transform);
         _isUsing = true;
         _handler.SetTarget(target);
@@ -51,9 +51,10 @@ public class Robot : MonoBehaviour
         _storage = storage;
     }
 
-    public void BuildBase(Vector3 newBaseFlag)
+    public void BuildBase(Transform newBaseFlag)
     {
-        //_mover.SetParametres()
+        MovingStateChanged?.Invoke(true, newBaseFlag.gameObject.transform);
+        _isUsing = true;
     }
 
     private void GoBack()

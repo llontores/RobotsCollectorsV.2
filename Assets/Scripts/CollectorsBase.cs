@@ -6,15 +6,15 @@ public class CollectorsBase : MonoBehaviour
 {
     [SerializeField] private RobotsAdministrator _administrator;
 
-    public Vector3 NewBaseFlag => _newBaseFlag;
+    public Transform NewBaseFlag => _newBaseFlag;
     public bool NewBasePriority => _newBasePriority;
 
     private bool _newBasePriority = false;
-    private Vector3 _newBaseFlag;
+    private Transform _newBaseFlag;
 
-    public void SetNewBaseFlag(Vector3 flagPosition)
+    public void SetNewBaseFlag(Transform flag)
     {
-        _newBaseFlag = flagPosition;
+        _newBaseFlag = flag;
         TryBuildNewBase();
     }
 

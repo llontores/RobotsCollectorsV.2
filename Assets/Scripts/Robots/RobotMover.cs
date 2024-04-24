@@ -34,13 +34,6 @@ public class RobotMover : MonoBehaviour
         _robot = GetComponent<Robot>();
     }
 
-    public void SetParametres(Transform target, Vector3 storage, Vector3 startPosition)
-    {
-        _target = target;
-        _storage = storage;
-        _startPosition = startPosition;
-    }
-
     private void ControlMoving(bool isMoving, Transform target)
     {
         if (isMoving)
