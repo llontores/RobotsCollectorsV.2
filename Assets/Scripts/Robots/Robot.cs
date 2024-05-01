@@ -9,7 +9,7 @@ public class Robot : MonoBehaviour
 {
     [SerializeField] private RobotCollisionHandler _handler;
     public bool IsUsing => _isUsing;
-    public event UnityAction<Ore> OreBrought;
+    public event UnityAction OreBrought;
     public event UnityAction<bool, Transform> MovingStateChanged;
     public event UnityAction WorkingStateChanged;
 
@@ -37,12 +37,14 @@ public class Robot : MonoBehaviour
         _mover = GetComponent<RobotMover>();
         _isUsing = false;
     }
+
     public void BringOre(Ore target)
     {
         _target = target;
         MovingStateChanged?.Invoke(true, target.gameObject.transform);
         _isUsing = true;
-        _handler.SetTarget(target);
+        _mover.SetTarget(_target);
+        _handler.SetTarget(_target);
     }
 
     public void SetBase(Transform receiver, Transform storage)
@@ -69,7 +71,7 @@ public class Robot : MonoBehaviour
         if (IsUsing)
         {
             MovingStateChanged?.Invoke(false, _target.gameObject.transform);
-            OreBrought?.Invoke(_target);
+            OreBrought?.Invoke();
             _isUsing = false;
             WorkingStateChanged?.Invoke();
         }

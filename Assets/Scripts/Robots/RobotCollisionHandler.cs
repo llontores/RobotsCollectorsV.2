@@ -16,6 +16,7 @@ public class RobotCollisionHandler : MonoBehaviour
             if (ore == _target)
             {
                 GetOre?.Invoke();
+                print("я коснулся руды");
             }
         }
     }

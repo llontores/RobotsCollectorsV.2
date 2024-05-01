@@ -608,6 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _robotPrice: 3
   _newBasePrice: 0
+  _newBaseFlag: {fileID: 0}
 --- !u!4 &1959040159
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 1959040158}
   _robotsAdministrator: {fileID: 405954383}
-  _collectorsBase: {fileID: 0}
+  _collectorsBase: {fileID: 2056773218}
 --- !u!65 &2056773224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -783,8 +784,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2983398, y: 0.7655176, z: 1.369667}
-  m_Center: {x: -0.049583435, y: -0.117241204, z: 0.09556961}
+  m_Size: {x: 1.4006958, y: 0.92243886, z: 1.4437561}
+  m_Center: {x: 0.0015945435, y: -0.03878057, z: 0.058525085}
 --- !u!1 &2139623140
 GameObject:
   m_ObjectHideFlags: 0

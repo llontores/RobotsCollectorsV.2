@@ -34,6 +34,11 @@ public class RobotMover : MonoBehaviour
         _robot = GetComponent<Robot>();
     }
 
+    public void SetTarget(Ore target)
+    {
+        _target = target.transform;
+    }
+
     private void ControlMoving(bool isMoving, Transform target)
     {
         if (isMoving)
@@ -56,11 +61,10 @@ public class RobotMover : MonoBehaviour
         _moveOreJob = StartCoroutine(MoveOre(_startPosition));
     }
 
-    public void PutOre(Ore ore)
+    public void PutOre()
     {
         if (_moveOreJob != null)
             StopCoroutine(_moveOreJob);
-        ore.gameObject.SetActive(false);
     }
 
     private IEnumerator MoveOre(Vector3 destination)

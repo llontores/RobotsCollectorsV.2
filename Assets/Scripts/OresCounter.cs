@@ -18,7 +18,7 @@ public class OresCounter : MonoBehaviour
         newRobot.OreBrought += IncreaseOres;
     }
 
-    public void IncreaseOres(Ore ore)
+    public void IncreaseOres()
     {
         _counter++;
 
