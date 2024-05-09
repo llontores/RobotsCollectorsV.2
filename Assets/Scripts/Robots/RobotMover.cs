@@ -64,7 +64,11 @@ public class RobotMover : MonoBehaviour
     public void PutOre()
     {
         if (_moveOreJob != null)
+        {
             StopCoroutine(_moveOreJob);
+            _target.gameObject.SetActive(false);
+        }
+
     }
 
     private IEnumerator MoveOre(Vector3 destination)

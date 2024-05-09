@@ -9,10 +9,12 @@ public class Robot : MonoBehaviour
 {
     [SerializeField] private RobotCollisionHandler _handler;
     public bool IsUsing => _isUsing;
+    public bool IsBringingOre => _isBringingOre;
     public event UnityAction OreBrought;
     public event UnityAction<bool, Transform> MovingStateChanged;
     public event UnityAction WorkingStateChanged;
 
+    private bool _isBringingOre;
     private Transform _storage;
     private bool _isUsing;
     private Transform _oresReceiver;
