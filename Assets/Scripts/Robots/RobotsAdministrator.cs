@@ -12,13 +12,14 @@ public class RobotsAdministrator : MonoBehaviour
     [SerializeField] private Transform _storage;
     [SerializeField] private OresCounter _oresCounter;
     [SerializeField] private Spawner _spawner;
+    [SerializeField] private CollectorsBase _collectorsBasePrefab;
 
     private Queue<Ore> _ores = new Queue<Ore>();
     private List<Robot> _robots = new List<Robot>();
     
     private void OnEnable()
     {
-        _spawner.OreSpawned += TryBringOre;
+        //_spawner.OreSpawned += TryBringOre;
         for (int i = 0; i < _inputRobots.Length; i++)
         {
             _robots.Add(_inputRobots[i]);
@@ -34,7 +35,7 @@ public class RobotsAdministrator : MonoBehaviour
 
     private void OnDisable()
     {
-        _spawner.OreSpawned -= TryBringOre;
+        //_spawner.OreSpawned -= TryBringOre;
         for (int i = 0; i < _robots.Count; i++)
         {
             _robots[i].WorkingStateChanged -= TryBringOre;
@@ -47,7 +48,7 @@ public class RobotsAdministrator : MonoBehaviour
         TryBringOre();
     }
 
-    private void TryBringOre()
+    public void TryBringOre()
     {
         Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
 
@@ -68,13 +69,25 @@ public class RobotsAdministrator : MonoBehaviour
         TryBringOre();
     }
 
-    public void TryBuildBase(Vector3 newBaseFlag)
+    public void TryBuildBase(Transform newBaseFlag)
     {
         Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
 
         if (result != null && _spawner.QueueCount > 0)
         {
-
+            result.GoToNewBaseFlag(newBaseFlag, _collectorsBasePrefab);
+            result.BuiltBase += RemoveRobotFromList;
         }
+    }
+
+    public void AddRobotToList(Robot robot)
+    {
+        _robots.Add(robot);
+    }
+
+    private void RemoveRobotFromList(Robot robot)
+    {
+        _robots.Remove(robot);
+        robot.BuiltBase -= RemoveRobotFromList;
     }
 }

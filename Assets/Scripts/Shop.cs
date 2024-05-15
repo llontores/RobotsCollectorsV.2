@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shop : MonoBehaviour
+public abstract class Shop : MonoBehaviour
 {
     [SerializeField] private int _robotPrice;
     [SerializeField] private int _newBasePrice;
@@ -36,16 +36,22 @@ public class Shop : MonoBehaviour
                 }
                 else if (_clicksCounter == 1)
                 {
-                    Vector3 mousePosition = Input.mousePosition;
-                    _newBaseFlag.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x,
-                    mousePosition.y, Camera.main.nearClipPlane));
-                    _collectorsBase.SetNewBaseFlag(_newBaseFlag.gameObject.transform);
-                    _clicksCounter = 0;
-                    if (_newBaseFlag.gameObject.activeSelf == false)
-                        _newBaseFlag.gameObject.SetActive(true);
+                    if (hit.collider.TryGetComponent<CollectorsBase>(out CollectorsBase collectorsBase) == false)
+                    {
+                        Vector3 mousePosition = Input.mousePosition;
+                        print(mousePosition);
+                        _newBaseFlag.gameObject.transform.position = hit.point;
+                        _collectorsBase.SetNewBaseFlag(_newBaseFlag.gameObject.transform);
+                        _clicksCounter = 0;
+                        if (_newBaseFlag.gameObject.activeSelf == false)
+                            _newBaseFlag.gameObject.SetActive(true);
+                    }
+
                 }
+
             }
 
         }
+
     }
 }

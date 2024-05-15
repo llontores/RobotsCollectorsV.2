@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class OresCounter : MonoBehaviour
 {
-    [SerializeField] private Shop _shop;
     [SerializeField] private RobotsAdministrator _robotsAdministrator;
     [SerializeField] private CollectorsBase _collectorsBase;
 
+    private Shop _shop;
     private int _counter = 0;
     private List<Robot> _robots = new List<Robot>();
     private bool _newBasePriority = false;
