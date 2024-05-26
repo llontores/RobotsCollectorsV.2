@@ -6,21 +6,17 @@ public class CollectorsBase : MonoBehaviour
 {
     [SerializeField] private RobotsAdministrator _administrator;
 
+
     public Transform NewBaseFlag => _newBaseFlag;
     public bool NewBasePriority => _newBasePriority;
 
-    private Spawner _spawner;
     private bool _newBasePriority = false;
     private Transform _newBaseFlag;
+    private OresCounter _oresCounter;
 
-    private void OnEnable()
+    private void Start()
     {
-        _spawner.OreSpawned += _administrator.TryBringOre;
-    }
-
-    private void OnDisable()
-    {
-        _spawner.OreSpawned -= _administrator.TryBringOre;
+        _oresCounter = GetComponent<OresCounter>();
     }
 
     public void SetNewBaseFlag(Transform flag)
@@ -34,11 +30,12 @@ public class CollectorsBase : MonoBehaviour
         _administrator.AddRobotToList(robot);
     }
 
-    private void TryBuildNewBase()
+    public bool TryBuildNewBase()
     {
         if (_newBaseFlag != null)
             _newBasePriority = true;
-        _administrator.TryBuildBase(_newBaseFlag);
+        _oresCounter.NewBasePriorityChange();
+        return _administrator.TryBuildBase(_newBaseFlag);
     }
 
 }

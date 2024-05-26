@@ -255,6 +255,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347c2462c3edb0489e8d23625ca3f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &541760588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1623029212210102140, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
+  m_PrefabInstance: {fileID: 8961705211753242245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9271716a44df0d94e873fc471bff8b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &637943099
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,17 +296,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 1770580181}
-  _amount: 10
-  _pool: []
+  _amount: 15
   _prefabs:
   - {fileID: 1588557066262399289, guid: 6c1a8b80e40b9554986dcaa1c06dbfb5, type: 3}
   _delay: 5
-  _minX: 2
-  _maxX: 2
-  _minZ: 2
-  _maxZ: 2
-  _minAmount: 9
-  _maxAmount: 10
+  _minX: 1
+  _maxX: 1
+  _minZ: 1
+  _maxZ: 1
+  _minAmount: 2
+  _maxAmount: 5
 --- !u!4 &637943101
 Transform:
   m_ObjectHideFlags: 0
@@ -672,10 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _robotPrice: 3
-  _newBasePrice: 0
+  _newBasePrice: 5
   _newBaseFlag: {fileID: 7756196269453770219}
-  _clicksCounter: 0
-  _collectorsBase: {fileID: 0}
 --- !u!4 &1959040159
 Transform:
   m_ObjectHideFlags: 0
@@ -735,29 +743,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4192600203509678710
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4847979699774012937}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!4 &4252106433116565234
 Transform:
   m_ObjectHideFlags: 0
@@ -784,7 +769,6 @@ GameObject:
   - component: {fileID: 4252106433116565234}
   - component: {fileID: 5218589980444095101}
   - component: {fileID: 3952481274144757999}
-  - component: {fileID: 4192600203509678710}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -826,6 +810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7149118206997013395}
   - component: {fileID: 7756196269453770219}
+  - component: {fileID: 7756196269453770220}
   m_Layer: 0
   m_Name: NewBaseFlag
   m_TagString: Untagged
@@ -845,6 +830,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0f740d43737c24e93cedf49e3840eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7756196269453770220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756196269453770218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12010193, y: 0.8635187, z: 0.1403656}
+  m_Center: {x: -0.007461548, y: -0.06824064, z: 0.0013198853}
 --- !u!1001 &8208775676338424501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -929,11 +935,23 @@ PrefabInstance:
     - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
       propertyPath: _spawner
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 637943100}
     - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
       propertyPath: _robotsPrefab
       value: 
       objectReference: {fileID: 489406336}
+    - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
+      propertyPath: _collectorsBase
+      value: 
+      objectReference: {fileID: 541760588}
+    - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
+      propertyPath: _collectorsBasePrefab
+      value: 
+      objectReference: {fileID: 1623029212210102140, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
+    - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
+      propertyPath: _inputRobots.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4517523903723386504, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
       propertyPath: '_inputRobots.Array.data[0]'
       value: 

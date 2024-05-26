@@ -63,6 +63,7 @@ public class Robot : MonoBehaviour
 
     public void GoToNewBaseFlag(Transform newBaseFlag,CollectorsBase collectorsBasePrefab)
     {
+        _collectorsBasePrefab = collectorsBasePrefab;
         MovingStateChanged?.Invoke(true, newBaseFlag.gameObject.transform);
         _isUsing = true;
         _isBuildingBase = true;

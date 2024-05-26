@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Shop : MonoBehaviour
+public class Shop : MonoBehaviour
 {
     [SerializeField] private int _robotPrice;
     [SerializeField] private int _newBasePrice;

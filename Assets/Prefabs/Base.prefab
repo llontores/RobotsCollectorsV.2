@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _administrator: {fileID: 4517523903723386504}
-  _spawner: {fileID: 0}
 --- !u!114 &9169113222530530948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,15 +238,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _newRobotsSpawnpoint: {fileID: 8751747685993240933}
   _oresReceiver: {fileID: 5620706043716290734}
-  _robotsPrefab: {fileID: 0}
-  _inputRobots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _robotsPrefab: {fileID: 5010661349465273800, guid: 8733c1802495db342a7952774a96f93e, type: 3}
+  _inputRobots: []
   _storage: {fileID: 5827755887305741688}
   _oresCounter: {fileID: 9169113222530530948}
-  _spawner: {fileID: 0}
-  _collectorsBasePrefab: {fileID: 0}
+  _collectorsBasePrefab: {fileID: 1623029212210102140}
 --- !u!1 &8037642074512605396
 GameObject:
   m_ObjectHideFlags: 0

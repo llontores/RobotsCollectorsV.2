@@ -6,9 +6,8 @@ using UnityEngine;
 public class OresCounter : MonoBehaviour
 {
     [SerializeField] private RobotsAdministrator _robotsAdministrator;
-    [SerializeField] private CollectorsBase _collectorsBase;
+    [SerializeField] private Shop _shop;
 
-    private Shop _shop;
     private int _counter = 0;
     private List<Robot> _robots = new List<Robot>();
     private bool _newBasePriority = false;
@@ -22,21 +21,21 @@ public class OresCounter : MonoBehaviour
     {
         _counter++;
 
-        if (_newBasePriority == true)
-            TryBuildBase();
-
-        else
+        if (_newBasePriority == false)
+        {
             TryBuyNewRobot();
-
+        }
     }
 
-    private void TryBuildBase()
+    public bool BuyNewBase()
     {
         if (_counter >= _shop.NewBasePrice)
         {
-            //_robotsAdministrator.TryBuildBase();
             _counter -= _shop.NewBasePrice;
+            return true;
         }
+        return false;
+
     }
 
     private void OnDisable()
@@ -56,7 +55,7 @@ public class OresCounter : MonoBehaviour
         }
     }
 
-    private void NewBasePriorityChange()
+    public void NewBasePriorityChange()
     {
         _newBasePriority = true;
     }

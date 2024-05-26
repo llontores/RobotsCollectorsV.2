@@ -23,6 +23,18 @@ public class RobotCollisionHandler : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.TryGetComponent(out Ore ore))
+        {
+            if (ore == _target)
+            {
+                GetOre?.Invoke();
+            }
+        }
+    }
+
+
     public void SetTarget(Ore target)
     {
         _target = target;

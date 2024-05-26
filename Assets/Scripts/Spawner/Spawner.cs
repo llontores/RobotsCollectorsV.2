@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Spawner : ObjectPool
+public class Spawner : ObjectPool
 {
     [SerializeField] private GameObject[] _prefabs;
     [SerializeField] private float _delay;
