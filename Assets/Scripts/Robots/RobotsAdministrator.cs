@@ -78,9 +78,15 @@ public class RobotsAdministrator : MonoBehaviour
         {
             result.GoToNewBaseFlag(newBaseFlag, _collectorsBasePrefab);
             result.BuiltBase += RemoveRobotFromList;
+            result.GetComponent<RobotCollisionHandler>().GetNewBaseFlag += InitializeNewBase;
             return true;
         }
         return false;
+    }
+
+    private void InitializeNewBase(RobotCollisionHandler collisionHandler)
+    {
+
     }
 
     public void AddRobotToList(Robot robot)

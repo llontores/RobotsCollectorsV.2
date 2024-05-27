@@ -76,7 +76,7 @@ public class Robot : MonoBehaviour
         MovingStateChanged?.Invoke(true, _oresReceiver);
     }
 
-    private void BuildBase()
+    private void BuildBase(RobotCollisionHandler handler)
     {
         MovingStateChanged?.Invoke(false, _oresReceiver);
         CollectorsBase spawnedBase = Instantiate(_collectorsBasePrefab, transform.position, Quaternion.identity);

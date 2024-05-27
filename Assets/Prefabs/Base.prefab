@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _robotsAdministrator: {fileID: 4517523903723386504}
-  _collectorsBase: {fileID: 1623029212210102140}
+  _shop: {fileID: 0}
 --- !u!65 &8189472514545446411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,6 +243,8 @@ MonoBehaviour:
   _storage: {fileID: 5827755887305741688}
   _oresCounter: {fileID: 9169113222530530948}
   _collectorsBasePrefab: {fileID: 1623029212210102140}
+  _spawner: {fileID: 0}
+  _collectorsBase: {fileID: 1623029212210102140}
 --- !u!1 &8037642074512605396
 GameObject:
   m_ObjectHideFlags: 0

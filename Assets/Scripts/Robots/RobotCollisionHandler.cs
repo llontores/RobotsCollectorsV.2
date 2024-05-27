@@ -7,7 +7,7 @@ public class RobotCollisionHandler : MonoBehaviour
 {
     public event UnityAction GetOre;
     public event UnityAction GetBaseBack;
-    public event UnityAction GetNewBaseFlag;
+    public event UnityAction<RobotCollisionHandler> GetNewBaseFlag;
     private Ore _target;
 
     private void OnTriggerEnter(Collider other)
@@ -19,7 +19,7 @@ public class RobotCollisionHandler : MonoBehaviour
 
         if(other.TryGetComponent(out NewBaseFlag newBaseFlag))
         {
-            GetNewBaseFlag?.Invoke();
+            GetNewBaseFlag?.Invoke(this);
         }
     }
 
