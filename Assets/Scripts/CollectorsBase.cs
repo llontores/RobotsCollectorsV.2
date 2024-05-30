@@ -6,7 +6,6 @@ public class CollectorsBase : MonoBehaviour
 {
     [SerializeField] private RobotsAdministrator _administrator;
 
-
     public Transform NewBaseFlag => _newBaseFlag;
     public bool NewBasePriority => _newBasePriority;
 
@@ -38,4 +37,9 @@ public class CollectorsBase : MonoBehaviour
         return _administrator.TryBuildBase(_newBaseFlag);
     }
 
+    public void InitializeComponents(Shop shop, Spawner spawner)
+    {
+        _oresCounter.InitializeShop(shop);
+        _administrator.InitializeSpawner(spawner);
+    }
 }

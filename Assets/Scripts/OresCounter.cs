@@ -8,6 +8,8 @@ public class OresCounter : MonoBehaviour
     [SerializeField] private RobotsAdministrator _robotsAdministrator;
     [SerializeField] private Shop _shop;
 
+    public Shop Shop => _shop;
+
     private int _counter = 0;
     private List<Robot> _robots = new List<Robot>();
     private bool _newBasePriority = false;
@@ -58,5 +60,10 @@ public class OresCounter : MonoBehaviour
     public void NewBasePriorityChange()
     {
         _newBasePriority = true;
+    }
+
+    public void InitializeShop(Shop shop)
+    {
+        _shop = shop;
     }
 }

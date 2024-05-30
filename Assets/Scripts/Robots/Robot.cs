@@ -30,14 +30,12 @@ public class Robot : MonoBehaviour
     {
         _handler.GetOre += GoBack;
         _handler.GetBaseBack += GetBase;
-        _handler.GetNewBaseFlag += BuildBase;
     }
 
     private void OnDisable()
     {
         _handler.GetOre -= GoBack;
         _handler.GetBaseBack -= GetBase;
-        _handler.GetNewBaseFlag -= BuildBase;
     }
 
     private void Awake()
@@ -76,12 +74,13 @@ public class Robot : MonoBehaviour
         MovingStateChanged?.Invoke(true, _oresReceiver);
     }
 
-    private void BuildBase(RobotCollisionHandler handler)
+    public void BuildBase(Shop shop, Spawner spawner)
     {
         MovingStateChanged?.Invoke(false, _oresReceiver);
         CollectorsBase spawnedBase = Instantiate(_collectorsBasePrefab, transform.position, Quaternion.identity);
         BuiltBase?.Invoke(this);
         spawnedBase.AddNewRobot(this);
+        spawnedBase.InitializeComponents(shop, spawner);
     }
 
     private void GetBase()

@@ -17,10 +17,12 @@ public class RobotsAdministrator : MonoBehaviour
 
     private Queue<Ore> _ores = new Queue<Ore>();
     private List<Robot> _robots = new List<Robot>();
-    
+
     private void OnEnable()
     {
-        _spawner.OreSpawned += TryBringOre;
+        if (_spawner != null)
+            _spawner.OreSpawned += TryBringOre;
+
         for (int i = 0; i < _inputRobots.Length; i++)
         {
             _robots.Add(_inputRobots[i]);
@@ -36,7 +38,8 @@ public class RobotsAdministrator : MonoBehaviour
 
     private void OnDisable()
     {
-        _spawner.OreSpawned -= TryBringOre;
+        if (_spawner != null)
+            _spawner.OreSpawned -= TryBringOre;
         for (int i = 0; i < _robots.Count; i++)
         {
             _robots[i].WorkingStateChanged -= TryAskRobotToWork;
@@ -84,9 +87,9 @@ public class RobotsAdministrator : MonoBehaviour
         return false;
     }
 
-    private void InitializeNewBase(RobotCollisionHandler collisionHandler)
+    private void InitializeNewBase(Robot result)
     {
-
+        result.BuildBase(_oresCounter.Shop, _spawner);
     }
 
     public void AddRobotToList(Robot robot)
@@ -109,7 +112,7 @@ public class RobotsAdministrator : MonoBehaviour
 
     private void TryAskRobotToWork()
     {
-        if(_collectorsBase.NewBasePriority == true && _oresCounter.BuyNewBase())
+        if (_collectorsBase.NewBasePriority == true && _oresCounter.BuyNewBase())
         {
             TryBuildBase(_collectorsBase.NewBaseFlag);
             //_oresCounter.BuyNewBase();
@@ -118,5 +121,12 @@ public class RobotsAdministrator : MonoBehaviour
         {
             TryBringOre();
         }
+    }
+
+    public void InitializeSpawner(Spawner spawner)
+    {
+        _spawner = spawner;
+        _spawner.OreSpawned += TryBringOre;
+        print("все проиинициализировалась");
     }
 }

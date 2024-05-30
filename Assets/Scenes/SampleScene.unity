@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 1770580181}
-  _amount: 15
+  _amount: 1000
   _prefabs:
   - {fileID: 1588557066262399289, guid: 6c1a8b80e40b9554986dcaa1c06dbfb5, type: 3}
   _delay: 5
@@ -304,8 +304,8 @@ MonoBehaviour:
   _maxX: 1
   _minZ: 1
   _maxZ: 1
-  _minAmount: 2
-  _maxAmount: 5
+  _minAmount: 5
+  _maxAmount: 10
 --- !u!4 &637943101
 Transform:
   m_ObjectHideFlags: 0
