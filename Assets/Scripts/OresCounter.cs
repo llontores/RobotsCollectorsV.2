@@ -19,6 +19,12 @@ public class OresCounter : MonoBehaviour
         newRobot.OreBrought += IncreaseOres;
     }
 
+    private void OnEnable()
+    {
+        _robotsAdministrator.BaseBuilt += UnsetNewBasePriority;
+    }
+
+
     public void IncreaseOres()
     {
         _counter++;
@@ -34,6 +40,7 @@ public class OresCounter : MonoBehaviour
         if (_counter >= _shop.NewBasePrice)
         {
             _counter -= _shop.NewBasePrice;
+            //UnsetNewBasePriority();
             return true;
         }
         return false;
@@ -46,6 +53,8 @@ public class OresCounter : MonoBehaviour
         {
             _robots[i].OreBrought -= IncreaseOres;
         }
+
+        _robotsAdministrator.BaseBuilt -= UnsetNewBasePriority;
     }
 
     private void TryBuyNewRobot()
@@ -57,9 +66,14 @@ public class OresCounter : MonoBehaviour
         }
     }
 
-    public void NewBasePriorityChange()
+    public void SetNewBasePriority()
     {
         _newBasePriority = true;
+    }
+
+    private void UnsetNewBasePriority()
+    {
+        _newBasePriority = false;
     }
 
     public void InitializeShop(Shop shop)

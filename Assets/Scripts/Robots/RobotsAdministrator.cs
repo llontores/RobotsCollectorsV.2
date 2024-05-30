@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class RobotsAdministrator : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class RobotsAdministrator : MonoBehaviour
 
     private Queue<Ore> _ores = new Queue<Ore>();
     private List<Robot> _robots = new List<Robot>();
+
+    public UnityAction BaseBuilt;
 
     private void OnEnable()
     {
@@ -82,6 +85,7 @@ public class RobotsAdministrator : MonoBehaviour
             result.GoToNewBaseFlag(newBaseFlag, _collectorsBasePrefab);
             result.BuiltBase += RemoveRobotFromList;
             result.GetComponent<RobotCollisionHandler>().GetNewBaseFlag += InitializeNewBase;
+            BaseBuilt?.Invoke();
             return true;
         }
         return false;

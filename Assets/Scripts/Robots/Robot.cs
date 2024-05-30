@@ -82,6 +82,8 @@ public class Robot : MonoBehaviour
         spawnedBase.AddNewRobot(this);
         spawnedBase.InitializeComponents(shop, spawner);
         _startPosition = spawnedBase.gameObject.transform;
+        OresCounter newBaseOresCounter = spawnedBase.GetComponent<OresCounter>();
+        newBaseOresCounter.AddRobot(this);
     }
 
     private void GetBase()

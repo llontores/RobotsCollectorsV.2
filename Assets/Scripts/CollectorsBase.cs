@@ -33,7 +33,7 @@ public class CollectorsBase : MonoBehaviour
     {
         if (_newBaseFlag != null)
             _newBasePriority = true;
-        _oresCounter.NewBasePriorityChange();
+        _oresCounter.SetNewBasePriority();
         return _administrator.TryBuildBase(_newBaseFlag);
     }
 
