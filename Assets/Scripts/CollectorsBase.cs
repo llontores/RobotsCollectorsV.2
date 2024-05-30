@@ -5,13 +5,13 @@ using UnityEngine;
 public class CollectorsBase : MonoBehaviour
 {
     [SerializeField] private RobotsAdministrator _administrator;
+    [SerializeField] private OresCounter _oresCounter;
 
     public Transform NewBaseFlag => _newBaseFlag;
     public bool NewBasePriority => _newBasePriority;
 
     private bool _newBasePriority = false;
     private Transform _newBaseFlag;
-    private OresCounter _oresCounter;
 
     private void Start()
     {
@@ -39,6 +39,7 @@ public class CollectorsBase : MonoBehaviour
 
     public void InitializeComponents(Shop shop, Spawner spawner)
     {
+        print("ЙОУ МЕНЯ ТУТ ИНИЦИАЛИЗИРУЮТ ААА");
         _oresCounter.InitializeShop(shop);
         _administrator.InitializeSpawner(spawner);
     }

@@ -21,7 +21,7 @@ public class Robot : MonoBehaviour
     private Transform _storage;
     private bool _isUsing;
     private bool _isBuildingBase;
-    private Transform _oresReceiver;
+    private Transform _startPosition;
     private RobotMover _mover;
     private Ore _target;
     private Coroutine _moveJob;
@@ -55,7 +55,7 @@ public class Robot : MonoBehaviour
 
     public void SetBase(Transform receiver, Transform storage)
     {
-        _oresReceiver = receiver;
+        _startPosition = receiver;
         _storage = storage;
     }
 
@@ -69,18 +69,19 @@ public class Robot : MonoBehaviour
 
     private void GoBack()
     {
-        MovingStateChanged?.Invoke(false, _oresReceiver);
+        MovingStateChanged?.Invoke(false, _startPosition);
         _mover.PickUpOre();
-        MovingStateChanged?.Invoke(true, _oresReceiver);
+        MovingStateChanged?.Invoke(true, _startPosition);
     }
 
     public void BuildBase(Shop shop, Spawner spawner)
     {
-        MovingStateChanged?.Invoke(false, _oresReceiver);
+        MovingStateChanged?.Invoke(false, _startPosition);
         CollectorsBase spawnedBase = Instantiate(_collectorsBasePrefab, transform.position, Quaternion.identity);
         BuiltBase?.Invoke(this);
         spawnedBase.AddNewRobot(this);
         spawnedBase.InitializeComponents(shop, spawner);
+        _startPosition = spawnedBase.gameObject.transform;
     }
 
     private void GetBase()

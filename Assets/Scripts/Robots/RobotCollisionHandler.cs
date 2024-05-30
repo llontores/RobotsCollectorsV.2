@@ -34,7 +34,6 @@ public class RobotCollisionHandler : MonoBehaviour
         }
     }
 
-
     public void SetTarget(Ore target)
     {
         _target = target;

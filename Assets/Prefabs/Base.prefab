@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _administrator: {fileID: 4517523903723386504}
+  _oresCounter: {fileID: 9169113222530530948}
 --- !u!114 &9169113222530530948
 MonoBehaviour:
   m_ObjectHideFlags: 0
