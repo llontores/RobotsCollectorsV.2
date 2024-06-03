@@ -41,7 +41,7 @@ public class Shop : MonoBehaviour
                         Vector3 mousePosition = Input.mousePosition;
                         print(mousePosition);
                         _newBaseFlag.gameObject.transform.position = hit.point;
-                        _collectorsBase.SetNewBaseFlag(_newBaseFlag.gameObject.transform);
+                        _collectorsBase.SetNewBaseFlag(_newBaseFlag);
                         _clicksCounter = 0;
                         if (_newBaseFlag.gameObject.activeSelf == false)
                             _newBaseFlag.gameObject.SetActive(true);

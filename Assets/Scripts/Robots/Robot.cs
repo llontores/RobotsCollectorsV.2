@@ -14,8 +14,8 @@ public class Robot : MonoBehaviour
     public event UnityAction<bool, Transform> MovingStateChanged;
     public event UnityAction<Robot> BuiltBase;
     public event UnityAction OreBrought;
-    public event UnityAction WorkingStateChanged;
 
+    public event UnityAction WorkingStateChanged;
     private CollectorsBase _collectorsBasePrefab;
     private bool _isBringingOre;
     private Transform _storage;
@@ -25,6 +25,8 @@ public class Robot : MonoBehaviour
     private RobotMover _mover;
     private Ore _target;
     private Coroutine _moveJob;
+    private NewBaseFlag _newBaseFlag;
+    
 
     private void OnEnable()
     {
@@ -59,12 +61,13 @@ public class Robot : MonoBehaviour
         _storage = storage;
     }
 
-    public void GoToNewBaseFlag(Transform newBaseFlag,CollectorsBase collectorsBasePrefab)
+    public void GoToNewBaseFlag(NewBaseFlag newBaseFlag,CollectorsBase collectorsBasePrefab)
     {
         _collectorsBasePrefab = collectorsBasePrefab;
         MovingStateChanged?.Invoke(true, newBaseFlag.gameObject.transform);
         _isUsing = true;
         _isBuildingBase = true;
+        _newBaseFlag = newBaseFlag;
     }
 
     private void GoBack()
@@ -84,6 +87,7 @@ public class Robot : MonoBehaviour
         _startPosition = spawnedBase.gameObject.transform;
         OresCounter newBaseOresCounter = spawnedBase.GetComponent<OresCounter>();
         newBaseOresCounter.AddRobot(this);
+        _newBaseFlag.gameObject.SetActive(false );
     }
 
     private void GetBase()

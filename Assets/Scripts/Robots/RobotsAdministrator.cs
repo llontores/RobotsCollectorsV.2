@@ -76,7 +76,7 @@ public class RobotsAdministrator : MonoBehaviour
         TryBringOre();
     }
 
-    public bool TryBuildBase(Transform newBaseFlag)
+    public bool TryBuildBase(NewBaseFlag newBaseFlag)
     {
         Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
 

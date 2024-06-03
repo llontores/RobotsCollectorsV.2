@@ -7,18 +7,18 @@ public class CollectorsBase : MonoBehaviour
     [SerializeField] private RobotsAdministrator _administrator;
     [SerializeField] private OresCounter _oresCounter;
 
-    public Transform NewBaseFlag => _newBaseFlag;
+    public NewBaseFlag NewBaseFlag => _newBaseFlag;
     public bool NewBasePriority => _newBasePriority;
 
     private bool _newBasePriority = false;
-    private Transform _newBaseFlag;
+    private NewBaseFlag _newBaseFlag;
 
     private void Start()
     {
         _oresCounter = GetComponent<OresCounter>();
     }
 
-    public void SetNewBaseFlag(Transform flag)
+    public void SetNewBaseFlag(NewBaseFlag flag)
     {
         _newBaseFlag = flag;
         TryBuildNewBase();
