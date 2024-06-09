@@ -8,9 +8,6 @@ public class CollectorsBase : MonoBehaviour
     [SerializeField] private OresCounter _oresCounter;
 
     public NewBaseFlag NewBaseFlag => _newBaseFlag;
-    public bool NewBasePriority => _newBasePriority;
-
-    private bool _newBasePriority = false;
     private NewBaseFlag _newBaseFlag;
 
     private void Start()
@@ -21,7 +18,11 @@ public class CollectorsBase : MonoBehaviour
     public void SetNewBaseFlag(NewBaseFlag flag)
     {
         _newBaseFlag = flag;
-        TryBuildNewBase();
+        //TryBuildNewBase();
+        _oresCounter.SetNewBasePriority();
+        if (_oresCounter.TryBuyNewBase())
+            _administrator.TryBuildBase(_newBaseFlag);
+        
     }
 
     public void AddNewRobot(Robot robot)
@@ -29,13 +30,13 @@ public class CollectorsBase : MonoBehaviour
         _administrator.AddRobotToList(robot);
     }
 
-    public bool TryBuildNewBase()
-    {
-        if (_newBaseFlag != null)
-            _newBasePriority = true;
-        _oresCounter.SetNewBasePriority();
-        return _administrator.TryBuildBase(_newBaseFlag);
-    }
+    //private void TryBuildNewBase()
+    //{
+    //    if (_newBaseFlag != null)
+    //        _oresCounter.SetNewBasePriority();
+
+    //    _administrator.TryBuildBase(_newBaseFlag);
+    //}
 
     public void InitializeComponents(Shop shop, Spawner spawner)
     {

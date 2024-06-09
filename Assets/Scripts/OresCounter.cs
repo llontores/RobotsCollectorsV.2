@@ -8,6 +8,7 @@ public class OresCounter : MonoBehaviour
     [SerializeField] private RobotsAdministrator _robotsAdministrator;
     [SerializeField] private Shop _shop;
 
+    public bool NewBasePriority => _newBasePriority;
     public Shop Shop => _shop;
 
     private int _counter = 0;
@@ -28,19 +29,18 @@ public class OresCounter : MonoBehaviour
     public void IncreaseOres()
     {
         _counter++;
-
+        print(_counter);
         if (_newBasePriority == false)
         {
             TryBuyNewRobot();
         }
     }
 
-    public bool BuyNewBase()
+    public bool TryBuyNewBase()
     {
         if (_counter >= _shop.NewBasePrice)
         {
             _counter -= _shop.NewBasePrice;
-            //UnsetNewBasePriority();
             return true;
         }
         return false;

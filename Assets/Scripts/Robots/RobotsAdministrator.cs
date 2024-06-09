@@ -76,7 +76,7 @@ public class RobotsAdministrator : MonoBehaviour
         TryBringOre();
     }
 
-    public bool TryBuildBase(NewBaseFlag newBaseFlag)
+    public void TryBuildBase(NewBaseFlag newBaseFlag)
     {
         Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
 
@@ -86,9 +86,8 @@ public class RobotsAdministrator : MonoBehaviour
             result.BuiltBase += RemoveRobotFromList;
             result.GetComponent<RobotCollisionHandler>().GetNewBaseFlag += InitializeNewBase;
             BaseBuilt?.Invoke();
-            return true;
         }
-        return false;
+
     }
 
     private void InitializeNewBase(Robot result)
@@ -116,7 +115,7 @@ public class RobotsAdministrator : MonoBehaviour
 
     private void TryAskRobotToWork()
     {
-        if (_collectorsBase.NewBasePriority == true && _oresCounter.BuyNewBase())
+        if (_oresCounter.NewBasePriority == true && _oresCounter.TryBuyNewBase())
         {
             TryBuildBase(_collectorsBase.NewBaseFlag);
             //_oresCounter.BuyNewBase();

@@ -304,8 +304,8 @@ MonoBehaviour:
   _maxX: 1
   _minZ: 1
   _maxZ: 1
-  _minAmount: 5
-  _maxAmount: 10
+  _minAmount: 2
+  _maxAmount: 3
 --- !u!4 &637943101
 Transform:
   m_ObjectHideFlags: 0
@@ -510,13 +510,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.340887, y: -0.6195128, z: 0.34088698, w: 0.6195128}
-  m_LocalPosition: {x: 69.25, y: 3.684, z: 82.78}
+  m_LocalRotation: {x: 0.40557975, y: -0.579228, z: 0.40557975, w: 0.579228}
+  m_LocalPosition: {x: 69.39, y: 5.77, z: 82.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 57.644, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: -90, z: 0}
 --- !u!114 &1205678717 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9169113222530530948, guid: 21fc043f5aa0f034097d983d6508b6ff, type: 3}
