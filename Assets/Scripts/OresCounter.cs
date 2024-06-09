@@ -26,10 +26,10 @@ public class OresCounter : MonoBehaviour
     }
 
 
-    public void IncreaseOres()
+    private void IncreaseOres()
     {
         _counter++;
-        print(_counter);
+        print(_counter + gameObject.name);
         if (_newBasePriority == false)
         {
             TryBuyNewRobot();
@@ -69,6 +69,7 @@ public class OresCounter : MonoBehaviour
     public void SetNewBasePriority()
     {
         _newBasePriority = true;
+        print($"йоу я тут хочу пострить базу {gameObject.name}");
     }
 
     private void UnsetNewBasePriority()

@@ -9,18 +9,13 @@ public class Robot : MonoBehaviour
 {
     [SerializeField] private RobotCollisionHandler _handler;
     public bool IsUsing => _isUsing;
-    public bool IsBuildingBase => _isBuildingBase;
-    public bool IsBringingOre => _isBringingOre;
     public event UnityAction<bool, Transform> MovingStateChanged;
     public event UnityAction<Robot> BuiltBase;
     public event UnityAction OreBrought;
 
     public event UnityAction WorkingStateChanged;
     private CollectorsBase _collectorsBasePrefab;
-    private bool _isBringingOre;
-    private Transform _storage;
     private bool _isUsing;
-    private bool _isBuildingBase;
     private Transform _startPosition;
     private RobotMover _mover;
     private Ore _target;
@@ -58,7 +53,7 @@ public class Robot : MonoBehaviour
     public void SetBase(Transform receiver, Transform storage)
     {
         _startPosition = receiver;
-        _storage = storage;
+
     }
 
     public void GoToNewBaseFlag(NewBaseFlag newBaseFlag,CollectorsBase collectorsBasePrefab)
@@ -66,7 +61,6 @@ public class Robot : MonoBehaviour
         _collectorsBasePrefab = collectorsBasePrefab;
         MovingStateChanged?.Invoke(true, newBaseFlag.gameObject.transform);
         _isUsing = true;
-        _isBuildingBase = true;
         _newBaseFlag = newBaseFlag;
     }
 
@@ -92,7 +86,7 @@ public class Robot : MonoBehaviour
 
     private void GetBase()
     {
-        if (IsUsing)
+        if (_mover.IsBringingOre)
         {
             MovingStateChanged?.Invoke(false, _target.gameObject.transform);
             OreBrought?.Invoke();

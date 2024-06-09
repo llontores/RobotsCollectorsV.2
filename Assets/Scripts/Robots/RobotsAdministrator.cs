@@ -117,6 +117,7 @@ public class RobotsAdministrator : MonoBehaviour
     {
         if (_oresCounter.NewBasePriority == true && _oresCounter.TryBuyNewBase())
         {
+            print("йоу я могу взять просто нахуй и построить базу " + gameObject.name);
             TryBuildBase(_collectorsBase.NewBaseFlag);
             //_oresCounter.BuyNewBase();
         }
@@ -130,6 +131,5 @@ public class RobotsAdministrator : MonoBehaviour
     {
         _spawner = spawner;
         _spawner.OreSpawned += TryBringOre;
-        print("все проиинициализировалась");
     }
 }

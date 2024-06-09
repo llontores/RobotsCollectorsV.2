@@ -304,8 +304,8 @@ MonoBehaviour:
   _maxX: 1
   _minZ: 1
   _maxZ: 1
-  _minAmount: 2
-  _maxAmount: 3
+  _minAmount: 10
+  _maxAmount: 16
 --- !u!4 &637943101
 Transform:
   m_ObjectHideFlags: 0

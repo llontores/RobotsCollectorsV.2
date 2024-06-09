@@ -9,6 +9,8 @@ public class RobotMover : MonoBehaviour
     [SerializeField] private RobotCollisionHandler _handler;
     [SerializeField] private float _getTargetDistance;
 
+    public bool IsBringingOre => _isBringingOre;
+
     private Vector3 _destination;
     private Transform _target;
     private Coroutine _moveOreJob;
@@ -16,6 +18,7 @@ public class RobotMover : MonoBehaviour
     private Vector3 _storage;
     private Vector3 _startPosition;
     private Robot _robot;
+    private bool _isBringingOre = false;
     private void OnEnable()
     {
         _robot.OreBrought += PutOre;
@@ -59,6 +62,7 @@ public class RobotMover : MonoBehaviour
     public void PickUpOre()
     {
         _moveOreJob = StartCoroutine(MoveOre(_startPosition));
+        _isBringingOre = true;
     }
 
     public void PutOre()
@@ -67,6 +71,7 @@ public class RobotMover : MonoBehaviour
         {
             StopCoroutine(_moveOreJob);
             _target.gameObject.SetActive(false);
+            _isBringingOre = false;
         }
 
     }
