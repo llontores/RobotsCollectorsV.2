@@ -20,20 +20,9 @@ public class OresCounter : MonoBehaviour
         newRobot.OreBrought += IncreaseOres;
     }
 
-    private void OnEnable()
+    public void InitializeShop(Shop shop)
     {
-        _robotsAdministrator.BaseBuilt += UnsetNewBasePriority;
-    }
-
-
-    private void IncreaseOres()
-    {
-        _counter++;
-        print(_counter + gameObject.name);
-        if (_newBasePriority == false)
-        {
-            TryBuyNewRobot();
-        }
+        _shop = shop;
     }
 
     public bool TryBuyNewBase()
@@ -45,6 +34,25 @@ public class OresCounter : MonoBehaviour
         }
         return false;
 
+    }
+
+    public void SetNewBasePriority()
+    {
+        _newBasePriority = true;
+    }
+
+    private void OnEnable()
+    {
+        _robotsAdministrator.BaseBuilt += UnsetNewBasePriority;
+    }
+
+    private void IncreaseOres()
+    {
+        _counter++;
+        if (_newBasePriority == false)
+        {
+            TryBuyNewRobot();
+        }
     }
 
     private void OnDisable()
@@ -66,19 +74,9 @@ public class OresCounter : MonoBehaviour
         }
     }
 
-    public void SetNewBasePriority()
-    {
-        _newBasePriority = true;
-        print($"йоу я тут хочу пострить базу {gameObject.name}");
-    }
-
     private void UnsetNewBasePriority()
     {
         _newBasePriority = false;
     }
 
-    public void InitializeShop(Shop shop)
-    {
-        _shop = shop;
-    }
 }

@@ -21,6 +21,86 @@ public class RobotsAdministrator : MonoBehaviour
 
     public UnityAction BaseBuilt;
 
+    public void InitializeSpawner(Spawner spawner)
+    {
+        _spawner = spawner;
+        _spawner.OreSpawned += TryBringOre;
+    }
+
+    public void AddOre(Ore ore)
+    {
+        _ores.Enqueue(ore);
+        TryBringOre();
+    }
+
+    public void TryBringOre()
+    {
+        Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
+        if (result != null && _spawner.QueueCount > 0)
+        {
+            Ore currentOre = _spawner.DequeueOres();
+            result.BringOre(currentOre);
+        }
+    }
+
+    public void TryAddRobot()
+    {
+        Robot addedRobot = Instantiate(_robotsPrefab, _newRobotsSpawnpoint.position, Quaternion.identity);
+        addedRobot.SetBase(_oresReceiver, _storage);
+        addedRobot.WorkingStateChanged += TryBringOre;
+        _robots.Add(addedRobot);
+        _oresCounter.AddRobot(addedRobot);
+        TryBringOre();
+    }
+
+    public void AddRobotToList(Robot robot)
+    {
+        _robots.Add(robot);
+        robot.WorkingStateChanged += TryAskRobotToWork;
+    }
+    
+    public void ResetRobotsList()
+    {
+        _robots.Clear();
+    }
+
+    public void TryBuildBase(NewBaseFlag newBaseFlag)
+    {
+        Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
+
+        if (result != null)
+        {
+            result.GoToNewBaseFlag(newBaseFlag, _collectorsBasePrefab);
+            result.BuiltBase += RemoveRobotFromList;
+            result.GetComponent<RobotCollisionHandler>().GetNewBaseFlag += InitializeNewBase;
+            BaseBuilt?.Invoke();
+        }
+
+    }
+
+    private void InitializeNewBase(Robot result)
+    {
+        result.BuildBase(_oresCounter.Shop, _spawner);
+    }
+
+    private void RemoveRobotFromList(Robot robot)
+    {
+        _robots.Remove(robot);
+        robot.BuiltBase -= RemoveRobotFromList;
+    }
+
+    private void TryAskRobotToWork()
+    {
+        if (_oresCounter.NewBasePriority == true && _oresCounter.TryBuyNewBase())
+        {
+            TryBuildBase(_collectorsBase.NewBaseFlag);
+        }
+        else
+        {
+            TryBringOre();
+        }
+    }
+
     private void OnEnable()
     {
         if (_spawner != null)
@@ -47,89 +127,5 @@ public class RobotsAdministrator : MonoBehaviour
         {
             _robots[i].WorkingStateChanged -= TryAskRobotToWork;
         }
-    }
-
-    public void AddOre(Ore ore)
-    {
-        _ores.Enqueue(ore);
-        TryBringOre();
-    }
-
-    public void TryBringOre()
-    {
-        Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
-
-        if (result != null && _spawner.QueueCount > 0)
-        {
-            Ore currentOre = _spawner.DequeueOres();
-            result.BringOre(currentOre);
-        }
-    }
-
-    public void TryAddRobot()
-    {
-        Robot addedRobot = Instantiate(_robotsPrefab, _newRobotsSpawnpoint.position, Quaternion.identity);
-        addedRobot.SetBase(_oresReceiver, _storage);
-        addedRobot.WorkingStateChanged += TryBringOre;
-        _robots.Add(addedRobot);
-        _oresCounter.AddRobot(addedRobot);
-        TryBringOre();
-    }
-
-    public void TryBuildBase(NewBaseFlag newBaseFlag)
-    {
-        Robot result = _robots.FirstOrDefault(robot => robot.IsUsing == false);
-
-        if (result != null)
-        {
-            result.GoToNewBaseFlag(newBaseFlag, _collectorsBasePrefab);
-            result.BuiltBase += RemoveRobotFromList;
-            result.GetComponent<RobotCollisionHandler>().GetNewBaseFlag += InitializeNewBase;
-            BaseBuilt?.Invoke();
-        }
-
-    }
-
-    private void InitializeNewBase(Robot result)
-    {
-        result.BuildBase(_oresCounter.Shop, _spawner);
-    }
-
-    public void AddRobotToList(Robot robot)
-    {
-        _robots.Add(robot);
-        robot.WorkingStateChanged += TryBringOre;
-    }
-
-    private void RemoveRobotFromList(Robot robot)
-    {
-        _robots.Remove(robot);
-        robot.BuiltBase -= RemoveRobotFromList;
-    }
-
-    public void ResetRobotsList()
-    {
-        _robots.Clear();
-    }
-
-
-    private void TryAskRobotToWork()
-    {
-        if (_oresCounter.NewBasePriority == true && _oresCounter.TryBuyNewBase())
-        {
-            print("йоу я могу взять просто нахуй и построить базу " + gameObject.name);
-            TryBuildBase(_collectorsBase.NewBaseFlag);
-            //_oresCounter.BuyNewBase();
-        }
-        else
-        {
-            TryBringOre();
-        }
-    }
-
-    public void InitializeSpawner(Spawner spawner)
-    {
-        _spawner = spawner;
-        _spawner.OreSpawned += TryBringOre;
     }
 }

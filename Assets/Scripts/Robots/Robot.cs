@@ -21,25 +21,6 @@ public class Robot : MonoBehaviour
     private Ore _target;
     private Coroutine _moveJob;
     private NewBaseFlag _newBaseFlag;
-    
-
-    private void OnEnable()
-    {
-        _handler.GetOre += GoBack;
-        _handler.GetBaseBack += GetBase;
-    }
-
-    private void OnDisable()
-    {
-        _handler.GetOre -= GoBack;
-        _handler.GetBaseBack -= GetBase;
-    }
-
-    private void Awake()
-    {
-        _mover = GetComponent<RobotMover>();
-        _isUsing = false;
-    }
 
     public void BringOre(Ore target)
     {
@@ -63,7 +44,21 @@ public class Robot : MonoBehaviour
         _isUsing = true;
         _newBaseFlag = newBaseFlag;
     }
-
+    
+    public void BuildBase(Shop shop, Spawner spawner)
+    {
+        _isUsing = false;
+        MovingStateChanged?.Invoke(false, _startPosition);
+        CollectorsBase spawnedBase = Instantiate(_collectorsBasePrefab, transform.position, Quaternion.identity);
+        BuiltBase?.Invoke(this);
+        spawnedBase.InitializeComponents(shop, spawner);
+        spawnedBase.AddNewRobot(this);
+        _startPosition = spawnedBase.gameObject.transform;
+        OresCounter newBaseOresCounter = spawnedBase.GetComponent<OresCounter>();
+        newBaseOresCounter.AddRobot(this);
+        _newBaseFlag.gameObject.SetActive(false );
+    }
+    
     private void GoBack()
     {
         MovingStateChanged?.Invoke(false, _startPosition);
@@ -71,17 +66,22 @@ public class Robot : MonoBehaviour
         MovingStateChanged?.Invoke(true, _startPosition);
     }
 
-    public void BuildBase(Shop shop, Spawner spawner)
+    private void OnEnable()
     {
-        MovingStateChanged?.Invoke(false, _startPosition);
-        CollectorsBase spawnedBase = Instantiate(_collectorsBasePrefab, transform.position, Quaternion.identity);
-        BuiltBase?.Invoke(this);
-        spawnedBase.AddNewRobot(this);
-        spawnedBase.InitializeComponents(shop, spawner);
-        _startPosition = spawnedBase.gameObject.transform;
-        OresCounter newBaseOresCounter = spawnedBase.GetComponent<OresCounter>();
-        newBaseOresCounter.AddRobot(this);
-        _newBaseFlag.gameObject.SetActive(false );
+        _handler.GetOre += GoBack;
+        _handler.GetBaseBack += GetBase;
+    }
+
+    private void OnDisable()
+    {
+        _handler.GetOre -= GoBack;
+        _handler.GetBaseBack -= GetBase;
+    }
+
+    private void Awake()
+    {
+        _mover = GetComponent<RobotMover>();
+        _isUsing = false;
     }
 
     private void GetBase()

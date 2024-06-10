@@ -10,15 +10,10 @@ public class CollectorsBase : MonoBehaviour
     public NewBaseFlag NewBaseFlag => _newBaseFlag;
     private NewBaseFlag _newBaseFlag;
 
-    private void Start()
-    {
-        _oresCounter = GetComponent<OresCounter>();
-    }
 
     public void SetNewBaseFlag(NewBaseFlag flag)
     {
         _newBaseFlag = flag;
-        //TryBuildNewBase();
         _oresCounter.SetNewBasePriority();
         if (_oresCounter.TryBuyNewBase())
             _administrator.TryBuildBase(_newBaseFlag);
@@ -30,18 +25,14 @@ public class CollectorsBase : MonoBehaviour
         _administrator.AddRobotToList(robot);
     }
 
-    //private void TryBuildNewBase()
-    //{
-    //    if (_newBaseFlag != null)
-    //        _oresCounter.SetNewBasePriority();
-
-    //    _administrator.TryBuildBase(_newBaseFlag);
-    //}
-
     public void InitializeComponents(Shop shop, Spawner spawner)
     {
-        print("ЙОУ МЕНЯ ТУТ ИНИЦИАЛИЗИРУЮТ ААА");
         _oresCounter.InitializeShop(shop);
         _administrator.InitializeSpawner(spawner);
+    }
+
+    private void Start()
+    {
+        _oresCounter = GetComponent<OresCounter>();
     }
 }
