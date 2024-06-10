@@ -57,6 +57,7 @@ public class RobotsAdministrator : MonoBehaviour
     {
         _robots.Add(robot);
         robot.WorkingStateChanged += TryAskRobotToWork;
+        TryAskRobotToWork();
     }
     
     public void ResetRobotsList()

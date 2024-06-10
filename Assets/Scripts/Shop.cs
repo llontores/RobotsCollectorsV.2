@@ -39,7 +39,6 @@ public class Shop : MonoBehaviour
                     if (hit.collider.TryGetComponent<CollectorsBase>(out CollectorsBase collectorsBase) == false)
                     {
                         Vector3 mousePosition = Input.mousePosition;
-                        print(mousePosition);
                         _newBaseFlag.gameObject.transform.position = hit.point;
                         _collectorsBase.SetNewBaseFlag(_newBaseFlag);
                         _clicksCounter = 0;
